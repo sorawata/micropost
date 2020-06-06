@@ -10,8 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware'=>['auth']],function(){
-    Route::resource('users','UserController',['only'=>['index','show']]);
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
 });
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -20,6 +22,4 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
 Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MicropostsController@index');
