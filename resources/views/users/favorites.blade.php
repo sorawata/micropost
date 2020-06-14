@@ -7,7 +7,7 @@
             @include('users.card')
         </aside>
         <div class="col-sm-8">
-           
+           @include('users.navtabs')
             @include('microposts.microposts')
             {{-- ユーザ一覧 --}}
             @include('users.users')

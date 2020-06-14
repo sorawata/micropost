@@ -63,8 +63,9 @@ class UsersController extends Controller{
             'users' => $followers,
         ]);
     }
-public function favoriting($id)
+ public function favorites($id)
     {
+        
         // idの値でユーザを検索して取得
         $favorite = User::findOrFail($id);
 
@@ -72,12 +73,14 @@ public function favoriting($id)
         $favorite->loadRelationshipCounts();
 
         // ユーザのフォロー一覧を取得
-        $favoriting = $favorite->favoriting()->paginate(10);
+        $favorites = $favorite->favorites()->paginate(10);
+        $microposts = $favorite->microposts()->orderBy('created_at', 'desc')->paginate(10);
 
         // フォロー一覧ビューでそれらを表示
-        return view('users.followings', [
+        return view('users.favorites', [
             'user' => $favorite,
-            'users' => $favoriting,
+            'users' => $favorites,
+            'microposts'=>$microposts,
         ]);
     }
 }
