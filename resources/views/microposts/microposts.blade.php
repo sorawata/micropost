@@ -24,6 +24,7 @@
                     </div>
                 </div>
             </li>
+             @include('micopost_favorite.favorite_button')
         @endforeach
     </ul>
 
